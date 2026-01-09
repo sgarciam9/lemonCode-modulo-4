@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Member } from "../types";
+import "../App.css";
 
 function MembersList() {
-  const [organization, setOrganization] = useState("lemoncode");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const initialOrg = searchParams.get("org") ?? "lemoncode";
+
+  const [organization, setOrganization] = useState(initialOrg);
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(false);
-
-  const navigate = useNavigate();
 
   const fetchMembers = (org: string) => {
     setLoading(true);
@@ -20,37 +24,43 @@ function MembersList() {
   };
 
   useEffect(() => {
-    fetchMembers(organization);
+    fetchMembers(initialOrg);
   }, []);
 
-  return (
-    <div style={{ padding: "1rem" }}>
-      <h1>Miembros de GitHub</h1>
+  const handleSearch = () => {
+    setSearchParams({ org: organization });
+    fetchMembers(organization);
+  };
 
-      <input
-        value={organization}
-        onChange={(e) => setOrganization(e.target.value)}
-      />
-      <button onClick={() => fetchMembers(organization)}>Buscar</button>
+  return (
+    <div className="container">
+      <h1>GitHub Members</h1>
+
+      <header>
+        <input
+          value={organization}
+          onChange={(e) => setOrganization(e.target.value)}
+          placeholder="Nombre de la organización"
+        />
+        <button onClick={handleSearch}>Buscar</button>
+      </header>
 
       {loading && <p>Cargando...</p>}
 
-      <ul>
+      <div className="members-list">
         {members.map((member) => (
-          <li
+          <div
             key={member.id}
-            style={{ cursor: "pointer", marginBottom: "1rem" }}
-            onClick={() => navigate(`/detail/${member.login}`)}
+            className="member-card"
+            onClick={() =>
+              navigate(`/detail/${member.login}?org=${organization}`)
+            }
           >
-            <img
-              src={member.avatar_url}
-              width={50}
-              style={{ borderRadius: "50%", marginRight: "1rem" }}
-            />
-            {member.login}
-          </li>
+            <img src={member.avatar_url} alt={member.login} />
+            <span>{member.login}</span>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

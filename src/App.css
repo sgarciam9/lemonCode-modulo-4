@@ -1,0 +1,129 @@
+/* ===== RESET & BASE ===== */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #121212;
+  color: #eaeaea;
+}
+
+a {
+  color: #4ea1ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+h1, h2 {
+  margin-bottom: 1rem;
+}
+
+/* ===== HEADER / SEARCH ===== */
+header {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+header input {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #2c2c2c;
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+header input::placeholder {
+  color: #888;
+}
+
+header input:focus {
+  outline: none;
+  border-color: #4ea1ff;
+}
+
+/* ===== BUTTONS ===== */
+button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  background: linear-gradient(135deg, #4ea1ff, #1f6feb);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(78, 161, 255, 0.3);
+  opacity: 0.95;
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ===== MEMBERS LIST ===== */
+.members-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ===== MEMBER CARD ===== */
+.member-card {
+  background-color: #1e1e1e;
+  padding: 1.25rem;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.member-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.member-card img {
+  width: 80px;
+  border-radius: 50%;
+  margin-bottom: 0.75rem;
+}
+
+.member-card span {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* ===== DETAIL PAGE ===== */
+.detail {
+  max-width: 600px;
+  margin: 3rem auto;
+  background-color: #1e1e1e;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.detail img {
+  width: 150px;
+  border-radius: 50%;
+  margin: 1.25rem 0;
+}
+
+.detail button {
+  margin-bottom: 1rem;
+}

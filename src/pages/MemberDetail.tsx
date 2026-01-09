@@ -1,5 +1,6 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import "../App.css";
 
 interface MemberDetailData {
   login: string;
@@ -9,7 +10,11 @@ interface MemberDetailData {
 
 function MemberDetail() {
   const { login } = useParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  const org = searchParams.get("org") ?? "lemoncode";
+
   const [member, setMember] = useState<MemberDetailData | null>(null);
 
   useEffect(() => {
@@ -23,11 +28,11 @@ function MemberDetail() {
   }
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <button onClick={() => navigate(-1)}>⬅ Volver</button>
+    <div className="detail">
+      <button onClick={() => navigate(`/?org=${org}`)}>⬅ Volver</button>
 
       <h2>{member.login}</h2>
-      <img src={member.avatar_url} width={150} />
+      <img src={member.avatar_url} />
       <p>
         <a href={member.html_url} target="_blank">
           Ver perfil en GitHub
